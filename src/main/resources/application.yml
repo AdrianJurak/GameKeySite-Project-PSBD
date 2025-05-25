@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/g2a
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  liquibase:
+    change-log: classpath:db/changelog-master.xml
+    enabled: true
+    drop-first: true
+  sql:
+    init:
+      mode: always
