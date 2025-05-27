@@ -5,4 +5,7 @@
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <include file="changelog/001-game-creation.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/002-publisher-creation.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/003-review-creation.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>

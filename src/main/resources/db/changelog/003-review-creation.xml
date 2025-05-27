@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="003-review-creation.xml" author="ajurak">
+
+        <createTable tableName="review">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_name" type="varchar(30)"/>
+            <column name="stars" type="integer"/>
+            <column name="opinion" type="text"/>
+            <column name="game_id" type="int"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="review" baseColumnNames="game_id" constraintName="fk_review_game"
+                                 referencedTableName="game"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
