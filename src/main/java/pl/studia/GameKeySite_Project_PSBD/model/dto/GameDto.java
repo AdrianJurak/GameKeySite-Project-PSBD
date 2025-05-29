@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 
 @Data
@@ -19,6 +20,8 @@ public class GameDto {
     private BigDecimal price;
     private LocalDate creationDate;
     private LocalDate releaseDate;
+    private PublisherDto publisher;
+    private Set<ReviewDto> reviews;
 
-    //todo add genre and publisher
+    //todo add genre and platform
 }
