@@ -3,6 +3,8 @@ package pl.studia.GameKeySite_Project_PSBD.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import pl.studia.GameKeySite_Project_PSBD.model.enums.Genre;
+import pl.studia.GameKeySite_Project_PSBD.model.enums.Platform;
 
 
 import java.math.BigDecimal;
@@ -33,6 +35,12 @@ public class Game {
     private LocalDate creationDate;
     private LocalDate releaseDate;
 
+    @Enumerated(EnumType.STRING)
+    private Genre genre;
+
+    @Enumerated(EnumType.STRING)
+    private Platform platform;
+
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
@@ -40,5 +48,4 @@ public class Game {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     private Set<Review> reviews;
 
-    //Todo dodać platformę oraz gatunek
 }
