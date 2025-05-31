@@ -32,6 +32,12 @@ public class CreateGameCommand {
     @NotNull
     @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}", message = "PATTERN_MISMATCH_{regexp}")
     private String releaseDate;
-    //todo add publisher and review when enums are added
+
+    @NotNull(message = "GAME_GENRE_NULL")
+    private String genre;
+
+    @NotNull(message = "GAME_PLATFORM_NULL")
+    private String platform;
+
 
 }

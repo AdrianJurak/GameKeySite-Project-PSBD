@@ -5,6 +5,8 @@ import pl.studia.GameKeySite_Project_PSBD.model.Game;
 import pl.studia.GameKeySite_Project_PSBD.model.Publisher;
 import pl.studia.GameKeySite_Project_PSBD.model.command.CreateGameCommand;
 import pl.studia.GameKeySite_Project_PSBD.model.dto.GameDto;
+import pl.studia.GameKeySite_Project_PSBD.model.enums.Genre;
+import pl.studia.GameKeySite_Project_PSBD.model.enums.Platform;
 
 
 import java.time.LocalDate;
@@ -22,6 +24,8 @@ public class GameMapper {
                 .price(valueOf(command.getPrice()))
                 .creationDate(LocalDate.now())
                 .releaseDate(LocalDate.parse(command.getReleaseDate()))
+                .genre(Genre.valueOf(command.getGenre().toUpperCase()))
+                .platform(Platform.valueOf(command.getPlatform().toUpperCase()))
                 .publisher(publisher)
                 .build();
     }
@@ -35,6 +39,8 @@ public class GameMapper {
                 .price(game.getPrice())
                 .creationDate(game.getCreationDate())
                 .releaseDate(game.getReleaseDate())
+                .genre(game.getGenre())
+                .platform(game.getPlatform())
                 .publisher(PublisherMapper.mapToDto(game.getPublisher()))
                 .reviews(game.getReviews() == null ? null : game.getReviews().stream()
                         .map(ReviewMapper::mapToDto)
