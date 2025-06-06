@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/create-form-page.css">
+    <title> create game </title>
+</head>
+
+<body>
+<div class="container">
+    <a href="/api/v1/games" class="api-name no-underline"><h1>G2A</h1></a>
+</div>
+
+<div class="form-container">
+    <form action="/api/v1/reviews" method="post">
+
+        <h3>Publisher ID</h3>
+        <div class="input">
+            <label>
+                <input type="number" name="publisherId" placeholder="Publisher ID" required/>
+            </label>
+        </div>
+
+        <h3>Game Name</h3>
+        <div class="input">
+            <label>
+                <input type="text" name="name" placeholder="Game Name" required/>
+            </label>
+        </div>
+
+        <h3>Short Description</h3>
+        <div class="input">
+            <label>
+                <input type="text" name="shortDescription" placeholder="Short Description" required/>
+            </label>
+        </div>
+
+        <h3>Description</h3>
+        <div class="input">
+            <label>
+                <textarea name="description" rows="5" placeholder="Detailed game description" required></textarea>
+            </label>
+        </div>
+
+        <h3>Price</h3>
+        <div class="input">
+            <label>
+                <input type="number" name="price" min="0" step="0.01" placeholder="Price" required/>
+            </label>
+        </div>
+
+        <h3>Release Date</h3>
+        <div class="input">
+            <label>
+                <input type="date" name="releaseDate" required/>
+            </label>
+        </div>
+
+        <h3>Genre</h3>
+        <div class="input">
+            <label>
+                <input type="text" name="genre" placeholder="Genre" required/>
+            </label>
+        </div>
+
+        <h3>Platform</h3>
+        <div class="input">
+            <label>
+                <input type="text" name="platform" placeholder="Platform" required/>
+            </label>
+        </div>
+
+        <br>
+        <div class="button">
+            <button type="submit">Submit Review</button>
+        </div>
+    </form>
+</div>

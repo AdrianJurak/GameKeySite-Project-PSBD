@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/home-page.css">
+    <script src="/js/home-page.js"></script>
+    <title th:text="#{title}">Home Page</title>
+</head>
+
+<body>
+<div class="container">
+    <a href="/api/v1/games" class="api-name no-underline"><h1>G2A</h1></a>
+    <div class="language-switcher">
+        <label for="languageSelect" th:text="#{overview.languageSwitcher.label}"></label>
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="pl" th:selected="${#locale.language == 'pl'}">Polski</option>
+            <option value="en" th:selected="${#locale.language == 'en'}">English</option>
+            <option value="de" th:selected="${#locale.language == 'de'}">Deutsch</option>
+        </select>
+    </div>
+</div>
+
+<a href="/api/v1/reviews"> reviews </a>
+<a href="/api/v1/publishers"> publishers </a>
+<a href="/api/v1/games/create"> games </a>
+
+<div class="container">
+    <div class="search-filter-container">
+        <form action="/api/v1/games" method="get">
+            <div class="search-filter">
+
+                <div class="left-filter">
+                    <label for="name" th:text="#{overview.filter.gameName}"></label>
+                    <input type="text" id="name" name="name"
+                           th:placeholder="#{overview.filter.placeholder.name}"
+                           th:value="${param.name}">
+                </div>
+
+                <div class="right-filter">
+                    <details class="advanced-filters">
+                        <summary th:text="#{overview.filter.advanced.title}"></summary>
+                        <div class="advanced-content">
+                            <label>
+                                <input type="text" id="lowerPrice" name="lowerPrice"
+                                       th:placeholder="#{overview.filter.lowerPrice}"
+                                       th:value="${param.lowerPrice}">
+                            </label>
+
+                            <label>
+                                <input type="text" id="upperPrice" name="upperPrice"
+                                       th:placeholder="#{overview.filter.upperPrice}"
+                                       th:value="${param.upperPrice}">
+                            </label>
+
+                            <label>
+                                <input type="text" id="genre" name="genre"
+                                       th:placeholder="#{overview.filter.genre}"
+                                       th:value="${param.genre}">
+                            </label>
+
+                            <label>
+                                <input type="text" id="platform" name="platform"
+                                       th:placeholder="#{overview.filter.platform}"
+                                       th:value="${param.platform}">
+                            </label>
+
+                            <label>
+                                <input type="text" id="publisher" name="publisher"
+                                       th:placeholder="#{overview.filter.publisher}"
+                                       th:value="${param.publisher}">
+                            </label>
+
+                            <label>
+                                <select name="sort" id="sort">
+                                    <option value="" disabled th:selected="${param.sort == null}"
+                                            th:text="#{overview.filter.sort.label}"></option>
+                                    <option value="releaseDate,desc"
+                                            th:selected="${param.sort == 'releaseDate,desc'}"
+                                            th:text="#{overview.filter.sort.releaseDate.desc}"></option>
+                                    <option value="releaseDate,asc"
+                                            th:selected="${param.sort == 'releaseDate,asc'}"
+                                            th:text="#{overview.filter.sort.releaseDate.asc}"></option>
+                                    <option value="name,asc"
+                                            th:selected="${param.sort == 'name,asc'}"
+                                            th:text="#{overview.filter.sort.name.asc}"></option>
+                                    <option value="name,desc"
+                                            th:selected="${param.sort == 'name,desc'}"
+                                            th:text="#{overview.filter.sort.name.desc}"></option>
+                                    <option value="price,asc"
+                                            th:selected="${param.sort == 'price,asc'}"
+                                            th:text="#{overview.filter.sort.price.asc}"></option>
+                                    <option value="price,desc"
+                                            th:selected="${param.sort == 'price,desc'}"
+                                            th:text="#{overview.filter.sort.price.desc}"></option>
+                                </select>
+                            </label>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="buttons">
+                    <input type="submit" th:value="#{overview.filter.search}">
+                    <input type="button" th:value="#{overview.filter.clear}" onclick="clearFilter()">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="summary-table">
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{overview.table.header.id}"></th>
+                <th th:text="#{overview.table.header.name}"></th>
+                <th th:text="#{overview.table.header.description}"></th>
+                <th th:text="#{overview.table.header.price}"></th>
+                <th th:text="#{overview.table.header.releaseDate}"></th>
+                <th th:text="#{overview.table.header.genre}"></th>
+                <th th:text="#{overview.table.header.platform}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="game : ${games}"
+                th:attr="onclick=|goToGameDetails(${game.id})|"
+                style="cursor: pointer;">
+                <td th:text="${game.id}"></td>
+                <td th:text="${game.name}"></td>
+                <td th:text="${game.shortDescription}"></td>
+                <td th:text="${game.price}"></td>
+                <td th:text="${game.releaseDate}"></td>
+                <td th:text="${game.genre}"></td>
+                <td th:text="${game.platform}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination-container">
+        <div class="pagination">
+            <span th:if="${games.hasPrevious()}">
+                <a th:href="@{/api/v1/games(page=${games.number - 1}, size=${games.size}, sort=${param.sort}, name=${param.name}, lowerPrice=${param.lowerPrice}, upperPrice=${param.upperPrice}, genre=${param.genre}, platform=${param.platform}, publisher=${param.publisher})}"
+                   th:text="#{overview.pagination.prev}"></a>
+            </span>
+            <span th:each="i : ${#numbers.sequence(0, games.totalPages - 1)}">
+                <a th:if="${i != games.number}"
+                   th:href="@{/api/v1/games(page=${i}, size=${games.size}, sort=${param.sort}, name=${param.name}, lowerPrice=${param.lowerPrice}, upperPrice=${param.upperPrice}, genre=${param.genre}, platform=${param.platform}, publisher=${param.publisher})}"
+                   th:text="${i + 1}"></a>
+                <span th:if="${i == games.number}" th:text="${i + 1}"></span>
+            </span>
+            <span th:if="${games.hasNext()}">
+                <a th:href="@{/api/v1/games(page=${games.number + 1}, size=${games.size}, sort=${param.sort}, name=${param.name}, lowerPrice=${param.lowerPrice}, upperPrice=${param.upperPrice}, genre=${param.genre}, platform=${param.platform}, publisher=${param.publisher})}"
+                   th:text="#{overview.pagination.next}"></a>
+            </span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

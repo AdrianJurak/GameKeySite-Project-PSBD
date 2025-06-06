@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #000000, #1a1a1a);
+    color: #ffffff;
+}
+
+/* Container styling */
+.container {
+    padding: 20px;
+}
+
+.api-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ee3d23;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+a.no-underline {
+    text-decoration: none;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "game publisher"
+        "game reviews";
+    gap: 20px;
+    padding: 20px;
+}
+
+.game-details {
+    grid-area: game;
+}
+
+.publisher-details {
+    grid-area: publisher;
+}
+
+.reviews-details {
+    grid-area: reviews;
+}
+
+.game-details,
+.publisher-details,
+.reviews-details {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border: 1px solid #ee3d23;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "game"
+            "publisher"
+            "reviews";
+    }
+}

@@ -1,5 +1,7 @@
 package pl.studia.GameKeySite_Project_PSBD.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,15 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 public class GameController {
 
     private final GameService gameService;
+
+    @GetMapping("/change-language")
+    public String changeLanguage(@RequestParam("lang") String lang, HttpServletResponse response) {
+        Cookie cookie = new Cookie("lang", lang);
+        cookie.setMaxAge(60 * 60 * 24 * 30); // 30 days
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return "redirect:/api/v1/games";
+    }
 
     @GetMapping("/create")
     public String getCreate() {

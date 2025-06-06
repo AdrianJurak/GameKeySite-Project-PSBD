@@ -3,7 +3,9 @@ package pl.studia.GameKeySite_Project_PSBD.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.studia.GameKeySite_Project_PSBD.exception.NotFoundException;
 import pl.studia.GameKeySite_Project_PSBD.model.Game;
+import pl.studia.GameKeySite_Project_PSBD.model.Review;
 import pl.studia.GameKeySite_Project_PSBD.model.command.CreateReviewCommand;
 import pl.studia.GameKeySite_Project_PSBD.model.dto.ReviewDto;
 import pl.studia.GameKeySite_Project_PSBD.repository.GameRepository;
@@ -23,7 +25,7 @@ public class ReviewService {
     public ReviewDto create(CreateReviewCommand command) {
         Integer gameId = command.getGameId();
         Game game = gameRepository.findById(gameId)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(() -> new NotFoundException(Review.class, gameId));
 
         return mapToDto(reviewRepository.save(mapFromCommand(command, game)));
     }
