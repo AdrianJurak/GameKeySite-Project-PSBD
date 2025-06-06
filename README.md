@@ -3,25 +3,19 @@
 ## Project Overview
 
 MVC Game Store is a web application based on the Model-View-Controller (MVC) architecture. It allows users to browse
-available games, sort and filter them, view detailed information, add games to the cart, and manage subscriptions.
+available games, sort and filter them, view detailed information.
 
 ## Features
 
 - **Game List** – The homepage displays a table with all available games, with sorting and filtering options.
 - **Game Details** – Clicking a game title opens a page with full details.
-- **Shopping Cart** – Users can add games to the cart and complete purchases.
 - **Language Switch** – The app supports multiple languages.
-- **User Panel** – Shows account details, active subscriptions, and the current cart.
-- **Registration & Login** – Users authenticate with a login token valid for 5 minutes.
-- **Subscriptions** – Automatic email notifications for active subscriptions.
-- **Game Key Delivery** – Purchased game keys are sent via email.
 
 ## Technologies
 
 - **Backend**: Spring Boot (Java), ORM (Hibernate)
 - **Frontend**: HTML, CSS, JavaScript
 - **Database**: MySQL
-- **Email Service**: JavaMailSender
 
 ## Installation & Setup
 

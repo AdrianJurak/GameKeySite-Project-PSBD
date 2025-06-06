@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/create-form-page.css">
+    <title> create publisher </title>
+</head>
+
+<body>
+<div class="container">
+    <a href="/api/v1/games" class="api-name no-underline"><h1>G2A</h1></a>
+</div>
+
+<div class="form-container">
+    <form action="/api/v1/publishers" method="post">
+
+        <h3>Publisher Name</h3>
+        <div class="input">
+            <label>
+                <input type="text" name="name" placeholder="Publisher Name" required/>
+            </label>
+        </div>
+
+        <h3>Information</h3>
+        <div class="input">
+            <label>
+                <textarea name="info" rows="5" placeholder="Enter publisher details" required></textarea>
+            </label>
+        </div>
+
+        <h3>Date of Establishment</h3>
+        <div class="input">
+            <label>
+                <input type="date" name="dateOfEstablishment" required/>
+            </label>
+        </div>
+
+        <br>
+        <div class="button">
+            <button type="submit">Submit Publisher</button>
+        </div>
+    </form>
+</div>

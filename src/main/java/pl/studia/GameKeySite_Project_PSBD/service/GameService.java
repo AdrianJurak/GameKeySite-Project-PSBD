@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.studia.GameKeySite_Project_PSBD.exception.InvalidEnumException;
+import pl.studia.GameKeySite_Project_PSBD.exception.NotFoundException;
 import pl.studia.GameKeySite_Project_PSBD.mapper.GameMapper;
 import pl.studia.GameKeySite_Project_PSBD.model.Game;
 import pl.studia.GameKeySite_Project_PSBD.model.Publisher;
@@ -17,11 +19,9 @@ import pl.studia.GameKeySite_Project_PSBD.model.enums.Platform;
 import pl.studia.GameKeySite_Project_PSBD.repository.GameRepository;
 import pl.studia.GameKeySite_Project_PSBD.repository.PublisherRepository;
 
-
 import static pl.studia.GameKeySite_Project_PSBD.mapper.GameMapper.mapFromCommand;
 import static pl.studia.GameKeySite_Project_PSBD.mapper.GameMapper.mapToDto;
 import static pl.studia.GameKeySite_Project_PSBD.service.specification.GameSpecificationFilter.*;
-
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +34,7 @@ public class GameService {
     public GameDto create(CreateGameCommand command) {
         Integer publisherId = command.getPublisherId();
         Publisher publisher = publisherRepository.findById(publisherId)
-                .orElseThrow(() -> new RuntimeException());
-        // TODO - obsługa wyjątków
+                .orElseThrow(() -> new NotFoundException(Publisher.class, publisherId));
 
         validateEnum(Genre.class, command.getGenre());
         validateEnum(Platform.class, command.getPlatform());
@@ -46,8 +45,7 @@ public class GameService {
     @Transactional
     public GameDto getById(Integer id) {
         Game game = gameRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException());
-        // TODO - obsługa wyjątków
+                .orElseThrow(() -> new NotFoundException(Game.class, id));
 
         return mapToDto(game);
     }
@@ -69,8 +67,7 @@ public class GameService {
         try {
             Enum.valueOf(enumClass, value.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException();
-            // TODO - obsługa wyjątków
+            throw new InvalidEnumException(enumClass, value);
         }
     }
 }

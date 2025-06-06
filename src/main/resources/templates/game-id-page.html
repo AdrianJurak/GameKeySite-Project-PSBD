@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/game-id-page.css">
+    <title> game id </title>
+</head>
+
+<body>
+<div class="container">
+    <a href="/api/v1/games" class="api-name no-underline"><h1>G2A</h1></a>
+</div>
+
+<div class="grid-container">
+    <div class="game-details">
+        <h2 th:text="${game.name}">Game Name</h2>
+        <p><strong>Description:</strong></p>
+        <p th:text="${game.description}">Full description here</p>
+        <p><strong>Price:</strong> <span th:text="${game.price}">0.00</span> PLN</p>
+        <p><strong>Genre:</strong> <span th:text="${game.genre}">ACTION</span></p>
+        <p><strong>Platform:</strong> <span th:text="${game.platform}">PC</span></p>
+        <p><strong>Creation date:</strong> <span th:text="${game.creationDate}">YYYY-MM-DD</span></p>
+        <p><strong>Release date:</strong> <span th:text="${game.releaseDate}">YYYY-MM-DD</span></p>
+    </div>
+
+    <div class="publisher-details">
+        <h3>Publisher</h3>
+        <p><strong>Name:</strong> <span th:text="${game.publisher.name}">Publisher Name</span></p>
+        <p><strong>Info:</strong> <span th:text="${game.publisher.info}">Publisher information here</span></p>
+        <p><strong>Date of Establishment:</strong> <span
+                th:text="${game.publisher.dateOfEstablishment}">YYYY-MM-DD</span></p>
+    </div>
+
+    <div class="reviews">
+        <h3>Reviews</h3>
+        <ul>
+            <li th:each="rev : ${game.reviews}">
+                <strong th:text="${rev.userName}">User</strong>: <span th:text="${rev.opinion}">Great game!</span>
+                (<span th:text="${rev.stars}">5</span>/5)
+            </li>
+            <li th:if="${#lists.isEmpty(game.reviews)}">0 reviews</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/create-form-page.css">
+    <title> create review </title>
+</head>
+
+<body>
+<div class="container">
+    <a href="/api/v1/games" class="api-name no-underline"><h1>G2A</h1></a>
+</div>
+
+<div class="form-container">
+    <form action="/api/v1/reviews" method="post">
+
+        <h3> select game ID </h3>
+        <div class="input">
+            <label>
+                <input type="number" name="gameId" placeholder="Game ID" required/>
+            </label>
+        </div>
+
+        <h3> your name </h3>
+        <div class="input">
+            <label>
+                <input type="text" name="userName" placeholder="Your Name" required/>
+            </label>
+        </div>
+
+        <h3> rating (0–5) </h3>
+        <div class="input">
+            <label>
+                <input type="number" name="stars" min="0" max="5" placeholder="Stars" required/>
+            </label>
+        </div>
+
+        <h3> your review </h3>
+        <div class="input">
+            <label>
+                <textarea name="opinion" rows="5" placeholder="Write your opinion here"
+                          required></textarea>
+            </label>
+        </div>
+
+        <br>
+        <div class="button">
+            <button type="submit">Submit Review</button>
+        </div>
+    </form>
+</div>
