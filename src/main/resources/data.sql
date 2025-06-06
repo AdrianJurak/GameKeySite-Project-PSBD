@@ -26,7 +26,4 @@ INSERT INTO game (publisher_id, name, short_description, description, price, cre
      189.99, '2025-04-01', '2018-10-26', 'ACTION', 'PC');
 
 INSERT INTO review (game_id, user_name, stars, opinion) VALUE
-    (1, 'bogdan', 4, 'fajna gra, cool ;)'),
-    (2, 'maciej', 1, 'jestem pedalem'),
-    (3, 'karolina', 5, 'pobilam czarnucha w kosciele katolickim, super!'),
-    (4, 'rozalia', 2, '50 za loda, las legnica');
+    (1, 'bogdan', 4, 'fajna gra, cool ;)');
